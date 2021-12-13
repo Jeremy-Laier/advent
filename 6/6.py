@@ -41,4 +41,5 @@ while (day > 0):
     fishes.append(zeroFishes)
     day -= 1
 
+print(fishes)
 print(sum(fishes))
