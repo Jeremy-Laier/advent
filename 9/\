@@ -1,0 +1,59 @@
+with open('input.txt') as input:
+    lines = input.readlines()
+
+input = []
+# 2d array of nums
+for line in lines:
+    parsed = list(line.strip())
+    parsed = list(map(int, parsed))
+
+    input.append(parsed)
+
+# if this is smallest element, save to list
+lowPoints = []
+for row in range(len(input)):
+    for col in range(len(input[0])):
+        
+        # elements in left col
+        # check if 0
+        adjacentList = []
+        if (col != 0):
+            if (row != 0):
+                adjacentList.append(input[row - 1][col - 1])
+            if (row != len(input) - 1):
+                adjacentList.append(input[row + 1][col - 1])
+            adjacentList.append(input[row][col - 1])
+        
+        # check current col
+        if (row != 0):
+            adjacentList.append(input[row - 1][col])
+
+        if (row != len(input) - 1):
+            adjacentList.append(input[row + 1][col])
+
+        # check outer col
+        if (col != len(input[0]) - 1):
+            if (row != 0):
+                adjacentList.append(input[row - 1][col + 1])
+            if (row != len(input) - 1):
+                adjacentList.append(input[row + 1][col + 1])
+
+            adjacentList.append(input[row][col + 1])
+
+        adjacentList.sort()
+        if (input[row][col] <= adjacentList[0]):
+            lowPoints.append(input[row][col] + 1)
+
+print(sum(lowPoints))
+
+basins = []
+basin  = []
+
+# depth first search of basins
+# make all tiles tuples
+
+for i in range(len(input)):
+    input[i] = list(map(lambda ele: (ele, False), input[i]))
+print(input)
+
+     
