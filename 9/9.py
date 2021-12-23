@@ -56,6 +56,23 @@ basin  = []
 for i in range(len(input)):
     input[i] = list(map(lambda ele: (ele, ele == 9), input[i]))
 
+import os
+clear = lambda: os.system('clear')
+
+import time
+def prettyPrint(input):
+    for row in range(len(input)):
+        for e in input[row]:
+            if (e[1] is True and not e[0] is 9):
+                print(('\x1b[6;30;42m' + str(e[0]) + '\x1b[0m').strip(), end='')
+            else:
+                print(e[0], end='')
+        print('')
+    time.sleep(0.01)
+    clear()
+
+
+
 def bfs(rowI, colI, input, basin):
     queue = [(rowI, colI)]
 
@@ -76,6 +93,7 @@ def bfs(rowI, colI, input, basin):
         # have not seen and the value is not 9
         basin.append(input[row][col][0])
         input[row][col] = (input[row][col][0], True)
+        prettyPrint(input)
 
         if (col != len(input[0]) - 1):
             queue.append((row, col + 1))
@@ -101,9 +119,9 @@ basins.sort(key=lambda basin: len(basin))
 
 basins = list(map(lambda basin: len(basin), basins))
 
-print(basins[-3:])
+# print(basins[-3:])
 
-import operator, functools
+# import operator, functools
 
-print(functools.reduce(operator.mul, basins[-3:], 1))
+# print(functools.reduce(operator.mul, basins[-3:], 1))
 
