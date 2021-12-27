@@ -27,7 +27,7 @@ def areTwoSmallsVisited(curPath):
     path = list(filter(lambda x: not x.isupper(), path))
     return len(set(path)) > 0
 
-def bfs(caves, currentCave, path, allPaths):
+def dfs(caves, currentCave, path, allPaths):
     curPath = deepcopy(path)
 
     if (currentCave == 'end'):
@@ -47,11 +47,11 @@ def bfs(caves, currentCave, path, allPaths):
             if (cave == 'start'):
                 continue
             else:
-                bfs(caves, cave, curPath, allPaths)
+                dfs(caves, cave, curPath, allPaths)
             
 path = []
 paths = []
-bfs(caves, 'start', path, paths)
+dfs(caves, 'start', path, paths)
 
 def printPretty(paths):
     for path in paths:
