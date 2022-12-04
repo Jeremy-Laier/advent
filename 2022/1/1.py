@@ -11,9 +11,4 @@ for i, calorie in enumerate(lines):
         curCalorie += int(calorie)
 
 print("part 1 answer", sorted(calories)[-1:][0])
-
 print("part 2 answer", sum(sorted(calories)[-3:]))
-
-
-
-
