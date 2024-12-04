@@ -16,6 +16,7 @@ func main() {
 		panic(err)
 	}
 
+	defer file.Close()
 	reader := bufio.NewReader(file)
 	memories := []string{}
 	for {
