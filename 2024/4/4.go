@@ -36,7 +36,6 @@ func pt1(wordSearch [][]string) {
 	// counting procedure:
 	//  search horizonztal
 	//  search vertical
-	//  search diagonal
 	//  search diagnonal down right
 	//  search diagnonal down left
 	// match procedure:
