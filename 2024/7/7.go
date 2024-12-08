@@ -48,6 +48,7 @@ func main() {
 	}
 
 	pt1(equations)
+	pt2(equations)
 	return
 }
 
@@ -58,8 +59,6 @@ func Map[T, U any](ts []T, f func(T) U) []U {
 	}
 	return us
 }
-
-const MaxUint = ^uint(0)
 
 func pt1(equations map[uint64][]uint64) {
 	var result uint64
@@ -73,8 +72,8 @@ func pt1(equations map[uint64][]uint64) {
 				break
 			}
 		}
+		slices.Reverse(v)
 	}
-	// 2501605300634
 
 	fmt.Println("pt1: ", result)
 }
@@ -92,6 +91,51 @@ func _pt1(n int, list []uint64) []uint64 {
 			[]uint64{
 				list[n] + iter,
 				list[n] * iter,
+			}...,
+		)
+	}
+
+	return ret
+}
+
+func pt2(equations map[uint64][]uint64) {
+	var result uint64
+
+	for k, v := range equations {
+		slices.Reverse(v)
+		answers := _pt2(0, v)
+		for _, answer := range answers {
+			if answer == k {
+				result += k
+				break
+			}
+		}
+		slices.Reverse(v)
+	}
+
+	fmt.Println("pt2: ", result)
+}
+
+func _pt2(n int, list []uint64) []uint64 {
+	if n == len(list)-1 {
+		return []uint64{list[n]}
+	}
+
+	iters := _pt2(n+1, list)
+
+	ret := []uint64{}
+	for _, iter := range iters {
+		concatStr := fmt.Sprintf("%d%d", iter, list[n])
+		concat, err := strconv.ParseUint(concatStr, 10, 64)
+		if err != nil {
+			panic(err)
+		}
+
+		ret = append(ret,
+			[]uint64{
+				list[n] + iter,
+				list[n] * iter,
+				concat,
 			}...,
 		)
 	}
