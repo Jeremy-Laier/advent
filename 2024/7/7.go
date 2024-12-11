@@ -87,11 +87,10 @@ func _pt1(n int, list []uint64) []uint64 {
 
 	ret := []uint64{}
 	for _, iter := range iters {
-		ret = append(ret,
-			[]uint64{
-				list[n] + iter,
-				list[n] * iter,
-			}...,
+		ret = append(ret, []uint64{
+			list[n] + iter,
+			list[n] * iter,
+		}...,
 		)
 	}
 
